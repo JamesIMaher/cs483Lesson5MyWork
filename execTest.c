@@ -9,7 +9,8 @@ void main (){
 	printf("Enter a command you would like exected, destroying the current process: \n");
 	char *buf = malloc(sizeof(char) *  _LINE_LEN);
 	fgets(buf, _LINE_LEN - 1, stdin);
-
+	//Remove the trailing new line character that fgets adds to the string. If the new line character exists, execvp will not work. 
+	buf[strlen(buf)-1] = '\0';
 	char *argv[50];
 
 	char *token = malloc(sizeof(char) * _LINE_LEN);
@@ -27,6 +28,6 @@ void main (){
 		printf("Token: %s\n",argv[i]);
 	}
 
-	//Create the argument array
+	execvp(argv[0], argv);
 }
 
